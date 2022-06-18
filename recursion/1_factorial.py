@@ -3,15 +3,12 @@
 
 # eg factorial
 # 5!=5*4*3*2*1=> 5 * 4!=5*(4*3!) etc.
-from subprocess import CalledProcessError
-
-
 def factorial(num):
     #keep making problem smaller
-    if num>1:
+    if num>=1:
         return num* factorial(num-1)
     # but at one point you need to solve the problem
-    elif num==1 or num==0:
+    elif num==0:
         return 1
     else:
         raise Exception("Please enter positive numbers. We don't know how to get answer for negative numbers")
