@@ -1,25 +1,26 @@
 # courses = [[100,200],[200,1300],[1000,1250],[2000,3200]]
 # Output: 3
 
-courses =  [[5,5],[4,6],[2,6]]
-# Output: 0
+#first sort on basis of last day; then keep trying
 
-def secondElement(ele):
-    return ele[0]
-courses.sort(key=secondElement)
-total_Day=0
-total_Courses=0
-for course in courses:
-    if total_Day+course[0]>course[1]:
-        break
-    if course[0]>course[1]:
-        pass
-    else:
-        total_Courses+=1
-        total_Day+=course[0]
+# def secondElement(ele):
+#     return ele[1]
+courses = [[2,5],[2,19],[1,8],[1,3]]
+# courses.sort(key=secondElement)
+courses.sort(key=lambda c:c[1])
 
-print(total_Day)
-print(total_Courses)
+from heapq import heapify,heappop,heappush
+max_heap=[]
+heapify(max_heap)
+total_duration=0
+for duration,last_day in courses:
+    if duration>last_day:
+        continue
+    heappush(max_heap, duration*-1)
+    total_duration+=duration
+    if total_duration>last_day:
+        total_duration-=-1 * heappop(max_heap)
+    print(f"debug: duration={duration} and last_day={last_day}; total_duration={total_duration}")
 
-#NOT CORRECT SOLUTION; REVISIT AFTER LEARNING HEAP + GREEDY
+print(len(max_heap))
 
